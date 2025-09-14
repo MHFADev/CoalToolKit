@@ -1,0 +1,13 @@
+Flask==2.3.3
+Werkzeug==2.3.7
+yt-dlp==2023.9.24
+gallery-dl==1.25.8
+ffmpeg-python==0.2.0
+Pillow==10.0.1
+requests==2.31.0
+python-docx==0.8.11
+pypandoc==1.11
+qrcode==7.4.2
+mutagen==1.47.0
+chardet==5.2.0
+gunicorn==21.2.0

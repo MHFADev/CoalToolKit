@@ -101,9 +101,15 @@ class FFmpegProcessor:
                 video_options['vcodec'] = 'libx264'
                 video_options['acodec'] = 'aac'
                 
-            # Resolution scaling
+            # Resolution scaling (supports both upscaling and downscaling)
             if resolution:
-                if resolution == '720p':
+                if resolution == '4K' or resolution == '2160p':
+                    stream = ffmpeg.filter(stream, 'scale', 3840, 2160)
+                elif resolution == '1440p':
+                    stream = ffmpeg.filter(stream, 'scale', 2560, 1440)
+                elif resolution == '1080p':
+                    stream = ffmpeg.filter(stream, 'scale', 1920, 1080)
+                elif resolution == '720p':
                     stream = ffmpeg.filter(stream, 'scale', 1280, 720)
                 elif resolution == '480p':
                     stream = ffmpeg.filter(stream, 'scale', 854, 480)

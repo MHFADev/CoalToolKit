@@ -57,21 +57,20 @@ class MediaDownloader:
     
     def download_audio(self, url: str, task_id: str, format_type: str = 'mp3', 
                       quality: str = '320') -> bool:
-        """Download audio only with yt-dlp"""
+        """Download audio only with yt-dlp - supports multiple formats"""
         try:
             update_progress(task_id, 10, 'processing', 'Mengambil informasi audio...')
             
             output_template = os.path.join(self.output_folder, f'audio_{task_id}.%(ext)s')
             
+            # Get audio configuration based on format
+            audio_config = self._get_audio_config(format_type, quality)
+            
             ydl_opts = {
                 'outtmpl': output_template,
                 'format': 'bestaudio/best',
                 'noplaylist': True,
-                'postprocessors': [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': format_type,
-                    'preferredquality': quality,
-                }],
+                'postprocessors': [audio_config],
             }
             
             update_progress(task_id, 30, 'processing', 'Memulai unduhan audio...')
@@ -178,18 +177,57 @@ class MediaDownloader:
             logger.error(f"Failed to get video info: {e}")
             return None
     
+    def _get_audio_config(self, format_type: str, quality: str) -> Dict:
+        """Get audio configuration for different formats"""
+        base_config = {
+            'key': 'FFmpegExtractAudio',
+            'preferredquality': quality,
+        }
+        
+        # Format-specific configurations
+        if format_type == 'mp3':
+            base_config['preferredcodec'] = 'mp3'
+        elif format_type == 'opus':
+            base_config['preferredcodec'] = 'opus'
+        elif format_type == 'm4a':
+            base_config['preferredcodec'] = 'm4a'
+        elif format_type == 'aac':
+            base_config['preferredcodec'] = 'aac'
+        elif format_type == 'flac':
+            base_config['preferredcodec'] = 'flac'
+            # FLAC is lossless, so don't limit quality for best results
+            if quality in ['320', 'best']:
+                del base_config['preferredquality']
+        elif format_type == 'wav':
+            base_config['preferredcodec'] = 'wav'
+            # WAV is uncompressed, remove quality setting
+            del base_config['preferredquality']
+        elif format_type == 'ogg':
+            base_config['preferredcodec'] = 'vorbis'
+        elif format_type == 'webm':
+            # For WebM container with Opus codec
+            base_config['preferredcodec'] = 'opus'
+            base_config['preferredformat'] = 'webm'
+        else:
+            # Default to mp3 for unknown formats
+            base_config['preferredcodec'] = 'mp3'
+            
+        return base_config
+    
     def _get_format_selector(self, format_type: str, quality: str) -> str:
         """Get format selector for yt-dlp based on format and quality"""
         if format_type == 'mp4':
             if quality == 'best':
-                return 'best[ext=mp4]
-
+                return 'best[ext=mp4]'
             elif quality == '2160p':
-                return 'best[height<=2160][ext=mp4]'
+                # Ensure audio+video merge for 4K
+                return 'bestvideo[height<=2160][ext=mp4]+bestaudio[ext=m4a]/best[height<=2160][ext=mp4]'
             elif quality == '1440p':
-                return 'best[height<=1440][ext=mp4]'
+                # Ensure audio+video merge for 1440p
+                return 'bestvideo[height<=1440][ext=mp4]+bestaudio[ext=m4a]/best[height<=1440][ext=mp4]'
             elif quality == '1080p':
-                return 'best[height<=1080][ext=mp4]'
+                # Ensure audio+video merge for 1080p
+                return 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]'
             elif quality == '720p':
                 return 'best[height<=720][ext=mp4]'
             elif quality == '480p':

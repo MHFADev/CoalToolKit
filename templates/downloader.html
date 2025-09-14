@@ -12,7 +12,11 @@
     <!-- Video Download -->
     <div class="tool-card">
         <div class="tool-card-header">
-            <div class="tool-icon">🎥</div>
+            <div class="tool-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                </svg>
+            </div>
             <h3 class="tool-title">Unduh Video</h3>
         </div>
         <p class="tool-description">
@@ -38,6 +42,9 @@
                 <label class="form-label" for="videoQuality">Kualitas:</label>
                 <select id="videoQuality" class="form-select">
                     <option value="best">Kualitas Terbaik</option>
+                    <option value="2160p">4K (2160p)</option>
+                    <option value="1440p">1440p (2K)</option>
+                    <option value="1080p">1080p HD</option>
                     <option value="720p">720p HD</option>
                     <option value="480p">480p SD</option>
                     <option value="360p">360p</option>
@@ -70,7 +77,13 @@
     <!-- Audio Download -->
     <div class="tool-card">
         <div class="tool-card-header">
-            <div class="tool-icon">🎵</div>
+            <div class="tool-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                    <path fill-rule="evenodd" d="M9 3v10H8V3h1z"/>
+                    <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"/>
+                </svg>
+            </div>
             <h3 class="tool-title">Unduh Audio</h3>
         </div>
         <p class="tool-description">
@@ -87,9 +100,13 @@
                 <label class="form-label" for="audioFormat">Format Audio:</label>
                 <select id="audioFormat" class="form-select">
                     <option value="mp3">MP3</option>
+                    <option value="opus">Opus</option>
+                    <option value="m4a">M4A</option>
                     <option value="aac">AAC</option>
-                    <option value="ogg">OGG</option>
                     <option value="flac">FLAC</option>
+                    <option value="ogg">OGG</option>
+                    <option value="wav">WAV</option>
+                    <option value="webm">WebM Audio</option>
                 </select>
             </div>
             
@@ -123,7 +140,11 @@
     <!-- Platform Support Info -->
     <div class="tool-card">
         <div class="tool-card-header">
-            <div class="tool-icon">🌐</div>
+            <div class="tool-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm.312-3.5h2.49c-.062-.89-.291-1.733-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+                </svg>
+            </div>
             <h3 class="tool-title">Platform yang Didukung</h3>
         </div>
         <p class="tool-description">
@@ -143,7 +164,11 @@
     <!-- Tips -->
     <div class="tool-card">
         <div class="tool-card-header">
-            <div class="tool-icon">💡</div>
+            <div class="tool-icon">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                </svg>
+            </div>
             <h3 class="tool-title">Tips & Panduan</h3>
         </div>
         <div class="tool-description">

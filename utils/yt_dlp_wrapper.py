@@ -56,7 +56,7 @@ class MediaDownloader:
             return False
     
     def download_audio(self, url: str, task_id: str, format_type: str = 'mp3', 
-                      quality: str = '192') -> bool:
+                      quality: str = '320') -> bool:
         """Download audio only with yt-dlp"""
         try:
             update_progress(task_id, 10, 'processing', 'Mengambil informasi audio...')
@@ -96,7 +96,7 @@ class MediaDownloader:
             
             ydl_opts = {
                 'outtmpl': output_template,
-                'format': 'best[height<=720]',
+                'format': 'best[height<=2160]',
                 'playlistend': max_downloads,
                 'ignoreerrors': True,
             }
@@ -182,7 +182,14 @@ class MediaDownloader:
         """Get format selector for yt-dlp based on format and quality"""
         if format_type == 'mp4':
             if quality == 'best':
-                return 'best[ext=mp4]'
+                return 'best[ext=mp4]
+
+            elif quality == '2160p':
+                return 'best[height<=2160][ext=mp4]'
+            elif quality == '1440p':
+                return 'best[height<=1440][ext=mp4]'
+            elif quality == '1080p':
+                return 'best[height<=1080][ext=mp4]'
             elif quality == '720p':
                 return 'best[height<=720][ext=mp4]'
             elif quality == '480p':
@@ -192,6 +199,9 @@ class MediaDownloader:
         elif format_type == 'webm':
             return 'best[ext=webm]'
         elif format_type == 'mkv':
-            return 'best[ext=mkv]'
-            
+            return 'best[ext=mkv]:best'
+        elif format_type == 'mp3':
+            return 'bestaudio/best'
         return 'best'
+        
+        

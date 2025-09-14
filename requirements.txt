@@ -1,9 +1,9 @@
 Flask==2.3.3
 Werkzeug==2.3.7
-yt-dlp==2023.9.24
+yt-dlp==2025.9.5
 gallery-dl==1.25.8
 ffmpeg-python==0.2.0
-Pillow==9.5.0
+Pillow==11.3.0
 requests==2.31.0
 python-docx==0.8.11
 pypandoc==1.11

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Video Processing - Universal Toolkit{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Video Processing</h1>
+    <p class="page-subtitle">Convert video formats, compress, merge, and extract audio from videos</p>
+</div>
+
+<div class="tools-grid">
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🎥</div>
+            <h3 class="tool-title">Video Conversion</h3>
+        </div>
+        <p class="tool-description">
+            Convert video files between different formats like MP4, WebM, MKV, and AVI.
+        </p>
+        
+        <form class="toolkit-form" action="/api/convert/video" method="post" enctype="multipart/form-data">
+            <div class="file-upload-area">
+                <div class="file-upload-icon">🎥</div>
+                <div class="file-upload-text">Drop your video file here or click to browse</div>
+                <div class="file-upload-hint">Supports MP4, WebM, MKV, AVI, MOV, FLV</div>
+                <input type="file" name="file" class="file-input" accept="video/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="video-format" class="form-label">Output Format</label>
+                <select id="video-format" name="format" class="form-select">
+                    <option value="mp4">MP4</option>
+                    <option value="webm">WebM</option>
+                    <option value="mkv">MKV</option>
+                    <option value="avi">AVI</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="video-quality" class="form-label">Quality</label>
+                <select id="video-quality" name="quality" class="form-select">
+                    <option value="best">Best Quality</option>
+                    <option value="720p">720p HD</option>
+                    <option value="480p">480p SD</option>
+                    <option value="360p">360p</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-large">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M6.271 5.055a.5.5 0 0 1 .52.044L11 7.055a.5.5 0 0 1 0 .89L6.791 9.901a.5.5 0 0 1-.791-.39V5.5a.5.5 0 0 1 .271-.445z"/>
+                </svg>
+                Convert Video
+            </button>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Converting...</div>
+            </div>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🎬</div>
+            <h3 class="tool-title">Extract Audio from Video</h3>
+        </div>
+        <p class="tool-description">
+            Extract audio tracks from video files and save as audio format.
+        </p>
+        
+        <form class="toolkit-form" action="/api/extract/audio" method="post" enctype="multipart/form-data">
+            <div class="file-upload-area">
+                <div class="file-upload-icon">🎬</div>
+                <div class="file-upload-text">Drop your video file here</div>
+                <div class="file-upload-hint">Any video format supported</div>
+                <input type="file" name="file" class="file-input" accept="video/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="extract-format" class="form-label">Audio Format</label>
+                <select id="extract-format" name="format" class="form-select">
+                    <option value="mp3">MP3</option>
+                    <option value="wav">WAV</option>
+                    <option value="aac">AAC</option>
+                    <option value="ogg">OGG</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-large">Extract Audio</button>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Extracting...</div>
+            </div>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

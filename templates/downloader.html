@@ -1,73 +1,133 @@
 {% extends "base.html" %}
 
-{% block title %}Media Downloader - Universal Toolkit{% endblock %}
+{% block title %}Pengunduh Media - Universal Toolkit{% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1 class="page-title">Media Downloader</h1>
-    <p class="page-subtitle">Download videos and audio from YouTube, TikTok, Instagram, Facebook, Twitter, and more</p>
+    <h1 class="page-title">Pengunduh Media</h1>
+    <p class="page-subtitle">Unduh video, audio, dan galeri dari berbagai platform dengan yt-dlp dan gallery-dl</p>
 </div>
 
 <div class="tools-grid">
+    <!-- Video Download -->
     <div class="tool-card">
         <div class="tool-card-header">
-            <div class="tool-icon">📥</div>
-            <h3 class="tool-title">Download Media</h3>
+            <div class="tool-icon">🎥</div>
+            <h3 class="tool-title">Unduh Video</h3>
         </div>
         <p class="tool-description">
-            Enter a URL from supported platforms to download videos or extract audio in various formats.
+            Unduh video dari YouTube, TikTok, Instagram, Facebook, dan platform lainnya
         </p>
         
-        <form class="toolkit-form url-form" data-action="/api/download">
+        <form class="toolkit-form" id="videoDownloadForm">
             <div class="form-group">
-                <label for="url" class="form-label">Video/Audio URL</label>
-                <input 
-                    type="url" 
-                    id="url" 
-                    name="url" 
-                    class="form-input" 
-                    placeholder="https://www.youtube.com/watch?v=..." 
-                    required
-                >
+                <label class="form-label" for="videoUrl">URL Video:</label>
+                <input type="text" id="videoUrl" class="form-input" placeholder="https://youtube.com/watch?v=..." required>
             </div>
             
             <div class="form-group">
-                <label for="format" class="form-label">Output Format</label>
-                <select id="format" name="format" class="form-select">
-                    <option value="mp4">Video (MP4)</option>
-                    <option value="mp3">Audio only (MP3)</option>
+                <label class="form-label" for="videoFormat">Format Output:</label>
+                <select id="videoFormat" class="form-select">
+                    <option value="mp4">MP4 (Video)</option>
+                    <option value="webm">WebM (Video)</option>
+                    <option value="mkv">MKV (Video)</option>
                 </select>
             </div>
             
-            <button type="submit" class="btn btn-large">
+            <div class="form-group">
+                <label class="form-label" for="videoQuality">Kualitas:</label>
+                <select id="videoQuality" class="form-select">
+                    <option value="best">Kualitas Terbaik</option>
+                    <option value="720p">720p HD</option>
+                    <option value="480p">480p SD</option>
+                    <option value="360p">360p</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn">
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                 </svg>
-                Start Download
+                Unduh Video
             </button>
-            
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <div class="progress-text">Initializing...</div>
-            </div>
-            
-            <div class="result-container">
-                <div class="result-title">Status</div>
-                <div class="result-message">Processing...</div>
-            </div>
         </form>
+        
+        <div class="progress-container" id="videoProgressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="videoProgressFill"></div>
+            </div>
+            <div class="progress-text" id="videoProgressText">Mempersiapkan unduhan...</div>
+        </div>
+        
+        <div class="result-container" id="videoResultContainer">
+            <div class="result-title" id="videoResultTitle"></div>
+            <div class="result-message" id="videoResultMessage"></div>
+            <a href="#" id="videoDownloadLink" class="btn" style="display: none;">Unduh File</a>
+        </div>
     </div>
 
+    <!-- Audio Download -->
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🎵</div>
+            <h3 class="tool-title">Unduh Audio</h3>
+        </div>
+        <p class="tool-description">
+            Unduh audio saja dari video dengan kualitas tinggi
+        </p>
+        
+        <form class="toolkit-form" id="audioDownloadForm">
+            <div class="form-group">
+                <label class="form-label" for="audioUrl">URL Video/Audio:</label>
+                <input type="text" id="audioUrl" class="form-input" placeholder="https://youtube.com/watch?v=..." required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="audioFormat">Format Audio:</label>
+                <select id="audioFormat" class="form-select">
+                    <option value="mp3">MP3</option>
+                    <option value="aac">AAC</option>
+                    <option value="ogg">OGG</option>
+                    <option value="flac">FLAC</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="audioQuality">Kualitas Audio:</label>
+                <select id="audioQuality" class="form-select">
+                    <option value="320">320 kbps (Terbaik)</option>
+                    <option value="192">192 kbps (Baik)</option>
+                    <option value="128">128 kbps (Standar)</option>
+                    <option value="96">96 kbps (Hemat)</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn">Unduh Audio</button>
+        </form>
+        
+        <div class="progress-container" id="audioProgressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="audioProgressFill"></div>
+            </div>
+            <div class="progress-text" id="audioProgressText">Mempersiapkan unduhan audio...</div>
+        </div>
+        
+        <div class="result-container" id="audioResultContainer">
+            <div class="result-title" id="audioResultTitle"></div>
+            <div class="result-message" id="audioResultMessage"></div>
+            <a href="#" id="audioDownloadLink" class="btn" style="display: none;">Unduh File Audio</a>
+        </div>
+    </div>
+
+    <!-- Platform Support Info -->
     <div class="tool-card">
         <div class="tool-card-header">
             <div class="tool-icon">🌐</div>
-            <h3 class="tool-title">Supported Platforms</h3>
+            <h3 class="tool-title">Platform yang Didukung</h3>
         </div>
         <p class="tool-description">
-            We support downloading from the following platforms:
+            Kami mendukung unduhan dari platform berikut:
         </p>
         <div style="margin-top: 16px;">
             <span class="btn btn-secondary btn-small">YouTube</span>
@@ -76,24 +136,144 @@
             <span class="btn btn-secondary btn-small">Facebook</span>
             <span class="btn btn-secondary btn-small">Twitter</span>
             <span class="btn btn-secondary btn-small">Vimeo</span>
-            <span class="btn btn-secondary btn-small">And many more...</span>
+            <span class="btn btn-secondary btn-small">Dan lainnya...</span>
+        </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">💡</div>
+            <h3 class="tool-title">Tips & Panduan</h3>
+        </div>
+        <div class="tool-description">
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Konten Publik Saja:</strong> Hanya unduh konten yang tersedia publik dan hormati hak cipta</li>
+                <li><strong>Opsi Kualitas:</strong> Format video mengunduh dengan kualitas terbaik, audio mengekstrak pada 192kbps</li>
+                <li><strong>Waktu Pemrosesan:</strong> Waktu unduhan tergantung pada durasi dan kualitas video</li>
+                <li><strong>Format Didukung:</strong> MP4 untuk video, MP3 untuk ekstraksi audio</li>
+                <li><strong>Ukuran File:</strong> File besar mungkin memerlukan waktu lebih lama untuk diproses dan diunduh</li>
+            </ul>
         </div>
     </div>
 </div>
 
-<div class="tool-card">
-    <div class="tool-card-header">
-        <div class="tool-icon">💡</div>
-        <h3 class="tool-title">Tips & Guidelines</h3>
-    </div>
-    <div class="tool-description">
-        <ul style="margin-left: 20px; line-height: 1.8;">
-            <li><strong>Public Content Only:</strong> Only download content that is publicly available and respect copyright laws</li>
-            <li><strong>Quality Options:</strong> Video format downloads in the best available quality, audio extracts at 192kbps</li>
-            <li><strong>Processing Time:</strong> Download time depends on video length and quality</li>
-            <li><strong>Supported Formats:</strong> MP4 for video, MP3 for audio extraction</li>
-            <li><strong>File Size:</strong> Large files may take longer to process and download</li>
-        </ul>
-    </div>
-</div>
+<script>
+// Downloader JavaScript dengan dukungan bahasa Indonesia
+class UniversalDownloader {
+    constructor() {
+        this.initializeEventListeners();
+    }
+
+    initializeEventListeners() {
+        document.getElementById('videoDownloadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleVideoDownload();
+        });
+
+        document.getElementById('audioDownloadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleAudioDownload();
+        });
+    }
+
+    async handleVideoDownload() {
+        const url = document.getElementById('videoUrl').value;
+        const format = document.getElementById('videoFormat').value;
+        const quality = document.getElementById('videoQuality').value;
+
+        await this.performDownload('/api/download/video', {
+            url, format, quality
+        }, 'video');
+    }
+
+    async handleAudioDownload() {
+        const url = document.getElementById('audioUrl').value;
+        const format = document.getElementById('audioFormat').value;
+        const quality = document.getElementById('audioQuality').value;
+
+        await this.performDownload('/api/download/audio', {
+            url, format, quality
+        }, 'audio');
+    }
+
+    async performDownload(endpoint, payload, type) {
+        const progressContainer = document.getElementById(`${type}ProgressContainer`);
+        const progressFill = document.getElementById(`${type}ProgressFill`);
+        const progressText = document.getElementById(`${type}ProgressText`);
+        const resultContainer = document.getElementById(`${type}ResultContainer`);
+        const downloadLink = document.getElementById(`${type}DownloadLink`);
+
+        progressContainer.style.display = 'block';
+        resultContainer.style.display = 'none';
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            
+            if (data.task_id) {
+                this.trackProgress(data.task_id, type);
+            } else {
+                this.showError(`${type}ResultContainer`, data.error);
+            }
+        } catch (error) {
+            this.showError(`${type}ResultContainer`, 'Terjadi kesalahan saat memulai unduhan');
+        }
+    }
+
+    trackProgress(taskId, type) {
+        const progressFill = document.getElementById(`${type}ProgressFill`);
+        const progressText = document.getElementById(`${type}ProgressText`);
+        const resultContainer = document.getElementById(`${type}ResultContainer`);
+        const downloadLink = document.getElementById(`${type}DownloadLink`);
+
+        const pollProgress = async () => {
+            try {
+                const response = await fetch(`/api/progress/${taskId}`);
+                const progress = await response.json();
+
+                progressFill.style.width = `${progress.progress}%`;
+                progressText.textContent = progress.message;
+
+                if (progress.status === 'completed') {
+                    document.getElementById(`${type}ProgressContainer`).style.display = 'none';
+                    resultContainer.style.display = 'block';
+                    resultContainer.className = 'result-container success';
+                    document.getElementById(`${type}ResultTitle`).textContent = 'Berhasil!';
+                    document.getElementById(`${type}ResultMessage`).textContent = progress.message;
+                    downloadLink.href = `/download/${taskId}`;
+                    downloadLink.style.display = 'inline-flex';
+                } else if (progress.status === 'error') {
+                    this.showError(`${type}ResultContainer`, progress.message);
+                } else {
+                    setTimeout(pollProgress, 1000);
+                }
+            } catch (error) {
+                this.showError(`${type}ResultContainer`, 'Terjadi kesalahan saat melacak progres');
+            }
+        };
+
+        pollProgress();
+    }
+
+    showError(containerId, message) {
+        const container = document.getElementById(containerId);
+        container.style.display = 'block';
+        container.className = 'result-container error';
+        const titleEl = container.querySelector('.result-title');
+        const messageEl = container.querySelector('.result-message');
+        if (titleEl) titleEl.textContent = 'Error';
+        if (messageEl) messageEl.textContent = message;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new UniversalDownloader();
+});
+</script>
 {% endblock %}

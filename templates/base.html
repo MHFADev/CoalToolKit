@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,65 +12,74 @@
         <!-- Sidebar Navigation -->
         <nav class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <a href="{{ url_for('index') }}" class="logo">
+                <a href="{{ url_for('main.index') }}" class="logo">
                     <div class="logo-icon">UT</div>
                     <span class="logo-text">Universal Toolkit</span>
                 </a>
             </div>
 
             <div class="nav-section">
-                <h3 class="nav-section-title">Media Tools</h3>
+                <h3 class="nav-section-title">Alat Media</h3>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="{{ url_for('downloader') }}" class="nav-link {% if request.endpoint == 'downloader' %}active{% endif %}">
+                        <a href="{{ url_for('main.downloader') }}" class="nav-link {% if request.endpoint == 'main.downloader' %}active{% endif %}">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/>
                             </svg>
-                            Media Downloader
+                            Pengunduh Media
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('main.video') }}" class="nav-link {% if request.endpoint == 'main.video' %}active{% endif %}">
+                            <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M6.271 5.055a.5.5 0 0 1 .52.044L11 7.055a.5.5 0 0 1 0 .89L6.791 9.901a.5.5 0 0 1-.791-.39V5.5a.5.5 0 0 1 .271-.445z"/>
+                            </svg>
+                            Alat Video
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="nav-section">
-                <h3 class="nav-section-title">Processing</h3>
+                <h3 class="nav-section-title">Pemrosesan</h3>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="{{ url_for('audio') }}" class="nav-link {% if request.endpoint == 'audio' %}active{% endif %}">
+                        <a href="{{ url_for('main.audio') }}" class="nav-link {% if request.endpoint == 'main.audio' %}active{% endif %}">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/>
                             </svg>
-                            Audio Tools
+                            Alat Audio
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url_for('image') }}" class="nav-link {% if request.endpoint == 'image' %}active{% endif %}">
+                        <a href="{{ url_for('main.image') }}" class="nav-link {% if request.endpoint == 'main.image' %}active{% endif %}">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
                             </svg>
-                            Image Tools
+                            Alat Gambar
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url_for('document') }}" class="nav-link {% if request.endpoint == 'document' %}active{% endif %}">
+                        <a href="{{ url_for('main.document') }}" class="nav-link {% if request.endpoint == 'main.document' %}active{% endif %}">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"/>
                             </svg>
-                            Document Tools
+                            Alat Dokumen
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="nav-section">
-                <h3 class="nav-section-title">Utilities</h3>
+                <h3 class="nav-section-title">Utilitas</h3>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="{{ url_for('utilities') }}" class="nav-link {% if request.endpoint == 'utilities' %}active{% endif %}">
+                        <a href="{{ url_for('main.utilities') }}" class="nav-link {% if request.endpoint == 'main.utilities' %}active{% endif %}">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"/>
                             </svg>
-                            Utilities
+                            Utilitas
                         </a>
                     </li>
                 </ul>

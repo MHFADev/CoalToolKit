@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: universal-toolkit
+    runtime: python3
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app:app
+    plan: free
+    env: python
+    region: oregon
+    branch: main
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: FLASK_ENV
+        value: production
+    healthCheckPath: /

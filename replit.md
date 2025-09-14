@@ -41,6 +41,17 @@ Preferred communication style: Simple, everyday language.
 - **File Type Support**: Centralized configuration in `config.py` with allowed extensions and MIME types
 - **Internationalization**: Indonesian language labels with fallback support
 
+# Deployment Options
+
+## Recommended Platforms for Python Flask
+- **Railway**: Easiest deployment with railway.json configuration
+- **Render**: Good free tier with render.yaml configuration  
+- **Fly.io**: Modern platform with excellent performance
+- **Heroku**: Classic platform with Procfile support
+
+## Why Not Netlify
+Netlify Functions only support JavaScript, TypeScript, and Go - not Python/Flask. Video processing also requires persistent servers, not serverless functions.
+
 # External Dependencies
 
 ## Core Processing Libraries

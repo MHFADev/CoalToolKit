@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Image Processing - Universal Toolkit{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Image Processing</h1>
+    <p class="page-subtitle">Convert image formats and resize images with advanced processing tools</p>
+</div>
+
+<div class="tools-grid">
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🖼️</div>
+            <h3 class="tool-title">Image Conversion & Resize</h3>
+        </div>
+        <p class="tool-description">
+            Convert between image formats and resize images to specific dimensions.
+        </p>
+        
+        <form class="toolkit-form" action="/api/convert/image" method="post" enctype="multipart/form-data">
+            <div class="file-upload-area">
+                <div class="file-upload-icon">🖼️</div>
+                <div class="file-upload-text">Drop your image here or click to browse</div>
+                <div class="file-upload-hint">Supports JPG, PNG, GIF, BMP, TIFF, WEBP, SVG</div>
+                <input type="file" name="file" class="file-input" accept="image/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="image-format" class="form-label">Output Format</label>
+                <select id="image-format" name="format" class="form-select">
+                    <option value="jpg">JPG</option>
+                    <option value="png">PNG</option>
+                    <option value="webp">WebP</option>
+                    <option value="gif">GIF</option>
+                    <option value="bmp">BMP</option>
+                    <option value="tiff">TIFF</option>
+                </select>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label for="width" class="form-label">Width (px)</label>
+                    <input type="number" id="width" name="width" class="form-input" placeholder="Auto">
+                </div>
+                <div class="form-group">
+                    <label for="height" class="form-label">Height (px)</label>
+                    <input type="number" id="height" name="height" class="form-input" placeholder="Auto">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-large">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                    <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                </svg>
+                Process Image
+            </button>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Processing...</div>
+            </div>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

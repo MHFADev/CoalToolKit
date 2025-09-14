@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Universal Toolkit - All-in-One Media & Document Tools{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Universal Toolkit</h1>
+    <p class="page-subtitle">Your complete solution for media processing, document conversion, and utility functions</p>
+</div>
+
+<div class="tools-grid">
+    <!-- Media Downloader -->
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">📥</div>
+            <h3 class="tool-title">Media Downloader</h3>
+        </div>
+        <p class="tool-description">
+            Download videos and audio from YouTube, TikTok, Instagram, Facebook, Twitter, and Vimeo. 
+            Support for multiple formats and quality options.
+        </p>
+        <a href="{{ url_for('downloader') }}" class="btn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+            </svg>
+            Start Downloading
+        </a>
+    </div>
+
+    <!-- Audio Tools -->
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🎵</div>
+            <h3 class="tool-title">Audio Processing</h3>
+        </div>
+        <p class="tool-description">
+            Extract audio from videos, convert between formats (MP3, OGG, AAC, FLAC), 
+            noise reduction, normalization, and pitch/speed control.
+        </p>
+        <a href="{{ url_for('audio') }}" class="btn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                <path fill-rule="evenodd" d="M9 3v10H8V3h1z"/>
+                <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"/>
+            </svg>
+            Process Audio
+        </a>
+    </div>
+
+    <!-- Image Tools -->
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🖼️</div>
+            <h3 class="tool-title">Image Processing</h3>
+        </div>
+        <p class="tool-description">
+            Image upscaling, format conversion, batch resize, compression, 
+            watermarking, and advanced image enhancement tools.
+        </p>
+        <a href="{{ url_for('image') }}" class="btn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+            </svg>
+            Edit Images
+        </a>
+    </div>
+
+    <!-- Document Tools -->
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">📄</div>
+            <h3 class="tool-title">Document Conversion</h3>
+        </div>
+        <p class="tool-description">
+            Convert between DOCX, PDF, ODT, MD, and HTML formats. 
+            OCR text extraction and PDF manipulation tools.
+        </p>
+        <a href="{{ url_for('document') }}" class="btn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+            </svg>
+            Convert Documents
+        </a>
+    </div>
+
+    <!-- Utilities -->
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🔧</div>
+            <h3 class="tool-title">Utilities</h3>
+        </div>
+        <p class="tool-description">
+            QR code generator and scanner, metadata extraction, 
+            auto-subtitle generation, and archive management tools.
+        </p>
+        <a href="{{ url_for('utilities') }}" class="btn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.292-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.292c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+            </svg>
+            Use Utilities
+        </a>
+    </div>
+</div>
+
+<div class="tool-card">
+    <div class="tool-card-header">
+        <div class="tool-icon">ℹ️</div>
+        <h3 class="tool-title">About Universal Toolkit</h3>
+    </div>
+    <p class="tool-description">
+        Universal Toolkit is a comprehensive open-source solution for all your media processing, 
+        document conversion, and utility needs. Built with modern web technologies and featuring 
+        a clean, developer-friendly interface inspired by the best tools in the industry.
+    </p>
+    <div style="margin-top: 16px;">
+        <span class="btn btn-secondary btn-small">Open Source</span>
+        <span class="btn btn-secondary btn-small">Python Flask</span>
+        <span class="btn btn-secondary btn-small">Dark Theme</span>
+        <span class="btn btn-secondary btn-small">Responsive</span>
+    </div>
+</div>
+{% endblock %}

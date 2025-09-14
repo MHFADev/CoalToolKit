@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Document Conversion - Universal Toolkit{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Document Conversion</h1>
+    <p class="page-subtitle">Convert between document formats like DOCX, PDF, ODT, MD, and HTML</p>
+</div>
+
+<div class="tools-grid">
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">📄</div>
+            <h3 class="tool-title">Document Format Conversion</h3>
+        </div>
+        <p class="tool-description">
+            Convert documents between various formats including DOCX, PDF, ODT, Markdown, and HTML.
+        </p>
+        
+        <form class="toolkit-form" action="/api/convert/document" method="post" enctype="multipart/form-data">
+            <div class="file-upload-area">
+                <div class="file-upload-icon">📄</div>
+                <div class="file-upload-text">Drop your document here or click to browse</div>
+                <div class="file-upload-hint">Supports DOCX, PDF, ODT, TXT, MD, HTML, RTF</div>
+                <input type="file" name="file" class="file-input" accept=".pdf,.docx,.doc,.odt,.txt,.md,.html,.rtf" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="doc-format" class="form-label">Output Format</label>
+                <select id="doc-format" name="format" class="form-select">
+                    <option value="pdf">PDF</option>
+                    <option value="docx">DOCX</option>
+                    <option value="odt">ODT</option>
+                    <option value="html">HTML</option>
+                    <option value="md">Markdown</option>
+                    <option value="txt">Plain Text</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-large">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                </svg>
+                Convert Document
+            </button>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Converting...</div>
+            </div>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

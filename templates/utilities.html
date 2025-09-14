@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Utilities - Universal Toolkit{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Utilities</h1>
+    <p class="page-subtitle">QR code generation, metadata extraction, and other utility functions</p>
+</div>
+
+<div class="tools-grid">
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🔲</div>
+            <h3 class="tool-title">QR Code Generator</h3>
+        </div>
+        <p class="tool-description">
+            Generate QR codes from any text, URL, or data. Perfect for sharing links, contact info, or any text data.
+        </p>
+        
+        <form class="toolkit-form url-form" data-action="/api/qr/generate">
+            <div class="form-group">
+                <label for="qr-text" class="form-label">Text or URL</label>
+                <textarea 
+                    id="qr-text" 
+                    name="text" 
+                    class="form-input" 
+                    rows="4"
+                    placeholder="Enter text, URL, or any data to encode in QR code..."
+                    required
+                ></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-large">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M2 2h2v2H2V2Z"/>
+                    <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1Z"/>
+                    <path d="M2 8h2v2H2V8Z"/>
+                    <path d="M6 6v6H0V6h6ZM5 7H1v4h4V7Z"/>
+                    <path d="M8 2h2v2H8V2Z"/>
+                    <path d="M12 0v6H6V0h6ZM11 1H7v4h4V1Z"/>
+                    <path d="M8 8h2v2H8V8Z"/>
+                    <path d="M12 6v6H6V6h6ZM11 7H7v4h4V7Z"/>
+                </svg>
+                Generate QR Code
+            </button>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">📊</div>
+            <h3 class="tool-title">Metadata Extraction</h3>
+        </div>
+        <p class="tool-description">
+            Extract metadata information from audio files including title, artist, album, duration, and technical details.
+        </p>
+        
+        <form class="toolkit-form" action="/api/metadata" method="post" enctype="multipart/form-data">
+            <div class="file-upload-area">
+                <div class="file-upload-icon">📊</div>
+                <div class="file-upload-text">Drop your audio file here or click to browse</div>
+                <div class="file-upload-hint">Supports MP3, WAV, OGG, AAC, FLAC, M4A</div>
+                <input type="file" name="file" class="file-input" accept="audio/*" required>
+            </div>
+            
+            <button type="submit" class="btn btn-large">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-5v-1a2 2 0 0 0-4 0v1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm-1 2h2v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6H8a1 1 0 0 0 2 0z"/>
+                </svg>
+                Extract Metadata
+            </button>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

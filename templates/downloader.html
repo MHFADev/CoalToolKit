@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Media Downloader - Universal Toolkit{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Media Downloader</h1>
+    <p class="page-subtitle">Download videos and audio from YouTube, TikTok, Instagram, Facebook, Twitter, and more</p>
+</div>
+
+<div class="tools-grid">
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">📥</div>
+            <h3 class="tool-title">Download Media</h3>
+        </div>
+        <p class="tool-description">
+            Enter a URL from supported platforms to download videos or extract audio in various formats.
+        </p>
+        
+        <form class="toolkit-form url-form" data-action="/api/download">
+            <div class="form-group">
+                <label for="url" class="form-label">Video/Audio URL</label>
+                <input 
+                    type="url" 
+                    id="url" 
+                    name="url" 
+                    class="form-input" 
+                    placeholder="https://www.youtube.com/watch?v=..." 
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="format" class="form-label">Output Format</label>
+                <select id="format" name="format" class="form-select">
+                    <option value="mp4">Video (MP4)</option>
+                    <option value="mp3">Audio only (MP3)</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-large">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+                Start Download
+            </button>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Initializing...</div>
+            </div>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🌐</div>
+            <h3 class="tool-title">Supported Platforms</h3>
+        </div>
+        <p class="tool-description">
+            We support downloading from the following platforms:
+        </p>
+        <div style="margin-top: 16px;">
+            <span class="btn btn-secondary btn-small">YouTube</span>
+            <span class="btn btn-secondary btn-small">TikTok</span>
+            <span class="btn btn-secondary btn-small">Instagram</span>
+            <span class="btn btn-secondary btn-small">Facebook</span>
+            <span class="btn btn-secondary btn-small">Twitter</span>
+            <span class="btn btn-secondary btn-small">Vimeo</span>
+            <span class="btn btn-secondary btn-small">And many more...</span>
+        </div>
+    </div>
+</div>
+
+<div class="tool-card">
+    <div class="tool-card-header">
+        <div class="tool-icon">💡</div>
+        <h3 class="tool-title">Tips & Guidelines</h3>
+    </div>
+    <div class="tool-description">
+        <ul style="margin-left: 20px; line-height: 1.8;">
+            <li><strong>Public Content Only:</strong> Only download content that is publicly available and respect copyright laws</li>
+            <li><strong>Quality Options:</strong> Video format downloads in the best available quality, audio extracts at 192kbps</li>
+            <li><strong>Processing Time:</strong> Download time depends on video length and quality</li>
+            <li><strong>Supported Formats:</strong> MP4 for video, MP3 for audio extraction</li>
+            <li><strong>File Size:</strong> Large files may take longer to process and download</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Audio Processing - Universal Toolkit{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Audio Processing</h1>
+    <p class="page-subtitle">Extract audio from videos and convert between audio formats</p>
+</div>
+
+<div class="tools-grid">
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <div class="tool-icon">🎵</div>
+            <h3 class="tool-title">Audio Conversion</h3>
+        </div>
+        <p class="tool-description">
+            Convert audio files between different formats like MP3, WAV, OGG, AAC, and FLAC.
+        </p>
+        
+        <form class="toolkit-form" action="/api/convert/audio" method="post" enctype="multipart/form-data">
+            <div class="file-upload-area">
+                <div class="file-upload-icon">🎵</div>
+                <div class="file-upload-text">Drop your audio file here or click to browse</div>
+                <div class="file-upload-hint">Supports MP3, WAV, OGG, AAC, FLAC, M4A, WMA</div>
+                <input type="file" name="file" class="file-input" accept="audio/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="audio-format" class="form-label">Output Format</label>
+                <select id="audio-format" name="format" class="form-select">
+                    <option value="mp3">MP3</option>
+                    <option value="wav">WAV</option>
+                    <option value="ogg">OGG</option>
+                    <option value="aac">AAC</option>
+                    <option value="flac">FLAC</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-large">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038L11 7.055a.5.5 0 0 1 0 .89L6.791 9.907a.5.5 0 0 1-.791-.389V5.482a.5.5 0 0 1 .271-.427z"/>
+                </svg>
+                Convert Audio
+            </button>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Converting...</div>
+            </div>
+            
+            <div class="result-container">
+                <div class="result-title">Status</div>
+                <div class="result-message">Processing...</div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

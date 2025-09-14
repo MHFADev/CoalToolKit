@@ -54,8 +54,17 @@ class FFmpegProcessor:
             elif output_format == 'aac':
                 audio_options['acodec'] = 'aac'
                 audio_options['audio_bitrate'] = f'{quality}k'
+            elif output_format == 'm4a':
+                audio_options['acodec'] = 'aac'
+                audio_options['audio_bitrate'] = f'{quality}k'
+            elif output_format == 'opus':
+                audio_options['acodec'] = 'libopus'
+                audio_options['audio_bitrate'] = f'{quality}k'
             elif output_format == 'ogg':
                 audio_options['acodec'] = 'libvorbis'
+                audio_options['audio_bitrate'] = f'{quality}k'
+            elif output_format == 'webm':
+                audio_options['acodec'] = 'libopus'
                 audio_options['audio_bitrate'] = f'{quality}k'
             elif output_format == 'flac':
                 audio_options['acodec'] = 'flac'

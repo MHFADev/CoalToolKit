@@ -36,7 +36,9 @@ class MediaDownloader:
                     'preferredcodec': 'mp3',
                     'preferredquality': '192',
                 }]
-            elif format_type == 'mp4' and quality != 'best':
+            elif format_type == 'mp4' and quality in ['2160p', '1440p', '1080p']:
+                # Ensure video+audio merge for high quality downloads
+                ydl_opts['merge_output_format'] = 'mp4'
                 ydl_opts['postprocessors'] = [{
                     'key': 'FFmpegVideoConvertor',
                     'preferedformat': 'mp4',

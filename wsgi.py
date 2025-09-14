@@ -4,12 +4,11 @@ import sys
 import logging
 from app import create_app, initialize_app
 
-# Configure production logging
+# Configure production logging - Railway prefers stdout for log aggregation
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('app.log'),
         logging.StreamHandler(sys.stdout)
     ]
 )
@@ -33,6 +32,7 @@ if missing_vars:
 try:
     initialize_app()
     application = create_app()
+    app = application  # Railway expects 'app' variable
     logger.info("✅ WSGI application initialized successfully for production")
 except Exception as e:
     logger.error(f"❌ Failed to initialize WSGI application: {e}")

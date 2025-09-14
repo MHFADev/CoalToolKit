@@ -37,6 +37,10 @@ def create_app():
     app.secret_key = session_secret
     app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB max file size
     
+    # Ensure directories exist (backup for wsgi.py initialization)
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+    
     # Register all blueprints
     app.register_blueprint(main_bp)
     app.register_blueprint(downloader_bp)
@@ -159,14 +163,13 @@ def initialize_app():
     
     logger.info("✅ Universal Toolkit initialized successfully")
 
-# Create Flask app
-app = create_app()
-
-# Register cleanup on exit
+# Register cleanup on exit (for development mode)
 atexit.register(lambda: cleanup_old_files([UPLOAD_FOLDER, OUTPUT_FOLDER], max_age_hours=0))
 
 if __name__ == '__main__':
+    # Initialize and create app for development
     initialize_app()
+    app = create_app()
     
     # Get host and port from environment or use defaults
     host = os.environ.get('HOST', '0.0.0.0')

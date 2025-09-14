@@ -4,7 +4,7 @@ import logging
 import threading
 import time
 import atexit
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 
 # Import all route blueprints
 from routes.main import main_bp
@@ -62,8 +62,6 @@ def create_app():
     def api_download_file(task_id):
         """Download the processed file"""
         try:
-            from flask import send_file, jsonify
-            
             # Find the output file for this task
             for filename in os.listdir(OUTPUT_FOLDER):
                 if task_id in filename:
@@ -79,13 +77,11 @@ def create_app():
     # Error handlers
     @app.errorhandler(413)
     def too_large(e):
-        from flask import jsonify
         return jsonify({'error': 'File terlalu besar. Maksimal ukuran adalah 100MB.'}), 413
 
     @app.errorhandler(Exception)
     def handle_exception(e):
         logger.error(f"Unhandled exception: {str(e)[:100]}...")  # Log limited error info
-        from flask import jsonify
         return jsonify({'error': 'Terjadi kesalahan sistem. Silakan coba lagi.'}), 500
     
     return app

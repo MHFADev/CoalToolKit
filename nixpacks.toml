@@ -1,0 +1,23 @@
+# Nixpacks configuration for Railway deployment
+[variables]
+NIXPACKS_PYTHON_VERSION = "3.11"
+
+# Install system dependencies required for Universal Toolkit
+[phases.system]
+dependsOn = []
+cmds = [
+  "apt-get update",
+  "apt-get install -y ffmpeg pandoc imagemagick sox libsox-fmt-all",
+  "apt-get clean",
+  "rm -rf /var/lib/apt/lists/*"
+]
+
+[phases.setup]
+dependsOn = ["system"]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt"
+]
+
+[start]
+cmd = "gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 --worker-class sync app:app"

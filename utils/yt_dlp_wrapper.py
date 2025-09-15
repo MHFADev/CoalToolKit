@@ -13,6 +13,9 @@ class MediaDownloader:
     
     def __init__(self, output_folder: str):
         self.output_folder = output_folder
+        # Set ffmpeg path for yt-dlp to find ffmpeg and ffprobe
+        import shutil
+        self.ffmpeg_location = shutil.which('ffmpeg')
         
     def download_video(self, url: str, task_id: str, format_type: str = 'mp4', 
                       quality: str = 'best') -> bool:
@@ -27,6 +30,7 @@ class MediaDownloader:
                 'format': self._get_format_selector(format_type, quality),
                 'noplaylist': True,
                 'extract_flat': False,
+                'ffmpeg_location': self.ffmpeg_location,
             }
             
             # Add post-processors if needed
@@ -73,6 +77,7 @@ class MediaDownloader:
                 'format': 'bestaudio/best',
                 'noplaylist': True,
                 'postprocessors': [audio_config],
+                'ffmpeg_location': self.ffmpeg_location,
             }
             
             update_progress(task_id, 30, 'processing', 'Memulai unduhan audio...')
@@ -100,6 +105,7 @@ class MediaDownloader:
                 'format': 'best[height<=2160]',
                 'playlistend': max_downloads,
                 'ignoreerrors': True,
+                'ffmpeg_location': self.ffmpeg_location,
             }
             
             update_progress(task_id, 30, 'processing', f'Mengunduh maksimal {max_downloads} video...')
@@ -159,6 +165,7 @@ class MediaDownloader:
                 'quiet': True,
                 'no_warnings': True,
                 'extract_flat': False,
+                'ffmpeg_location': self.ffmpeg_location,
             }
             
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
